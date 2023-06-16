@@ -1,20 +1,22 @@
 {
-  "uuid": "0f624a18-453b-4268-b322-ecdb7874fd12",
-  "lastMigration": 20,
+  "uuid": "9adf95c0-29dd-41e5-8aaf-f4efdc7f5b8d",
+  "lastMigration": 27,
   "name": "QueerGlobal Businesses API",
   "endpointPrefix": "api",
   "latency": 0,
-  "port": 3002,
-  "hostname": "0.0.0.0",
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
   "routes": [
     {
-      "uuid": "c3e66b29-e570-4efe-9a41-6f291bfc9b23",
+      "uuid": "2f145a8f-df46-4d72-aa74-ac030c5d471f",
+      "type": "http",
       "documentation": "Healthcheck for this API",
       "method": "get",
       "endpoint": "healthcheck",
       "responses": [
         {
-          "uuid": "81cf0861-0413-485b-9bd8-cb282213d057",
+          "uuid": "b1d21660-a283-4b84-a5f9-ba351bbfc4b2",
           "body": "[\n  {\n    \"status\": \"\",\n    \"serviceName\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
@@ -25,7 +27,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -34,7 +38,7 @@
           "default": true
         },
         {
-          "uuid": "8711b770-1c10-4eb6-9ccd-cd75591e1076",
+          "uuid": "39030244-78b7-4a89-9dc5-f6422d698079",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -45,7 +49,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -55,18 +61,18 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
-      "uuid": "11c298bf-ae4a-47ef-b945-33fe2b372a56",
+      "uuid": "a614f1c6-b062-4161-9c5a-0a30e866e9e3",
+      "type": "http",
       "documentation": "Returns a business by ID",
       "method": "get",
       "endpoint": "businesses/:id",
       "responses": [
         {
-          "uuid": "b90c20c7-ac7c-4883-9062-2e6a6b9f1c3b",
-          "body": "{\n  \"EventID\": {{faker 'datatype.number'}},\n  \"Summary\": {\n    \"EventID\": {{faker 'datatype.number'}},\n    \"Owner\": {{faker 'datatype.number'}},\n    \"Type\": \"\",\n    \"Header\": \"\",\n    \"Title\": \"\",\n    \"Status\": 1\n  },\n  \"Body\": \"\",\n  \"Objects\": [\n    {\n      \"ObjectID\": {{faker 'datatype.number'}},\n      \"ObjectName\": \"\",\n      \"ObjectType\": \"\",\n      \"ObjectTypeID\": {{faker 'datatype.number'}},\n      \"Object\": {}\n    }\n  ],\n  \"Categories\": [\n    {\n      \"CategoryID\": {{faker 'datatype.number'}},\n      \"CategoryName\": \"\",\n      \"CategoryDescription\": \"\"\n    }\n  ],\n  \"Chips\": [\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"value\": \"\"\n    }\n  ]\n}",
+          "uuid": "d964a4e3-a0ff-47ca-af89-07db51bc920e",
+          "body": "{\n  \"BusinessID\": \"{{urlParam 'id'}}\",\n  \"ResourceID\": \"{{faker 'datatype.uuid'}}\",\n  \"Type\": \"\",\n  \"Status\": 1,\n  \"Objects\": [\n    {\n      \"ObjectID\": \"{{faker 'datatype.uuid'}}\",\n      \"ObjectName\": \"\",\n      \"ObjectType\": \"\",\n      \"ObjectTypeID\": {{faker 'datatype.number'}},\n      \"Object\": {}\n    }\n  ],\n  \"Images\": [\n    {\n      \"ImageID\": \"{{faker 'datatype.uuid'}}\",\n      \"ImageName\": \"\",\n      \"Link\": \"\"\n    }\n  ]\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "business response",
@@ -76,7 +82,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -85,7 +93,7 @@
           "default": true
         },
         {
-          "uuid": "06a1aa9f-4a36-4eef-8365-36011aa7ec56",
+          "uuid": "c2c8fb13-0774-43ac-a7fb-63d56dc0e0ed",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -96,7 +104,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -106,17 +116,17 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
-      "uuid": "f8bf5582-4ce3-43b4-81ce-65312ae5a230",
+      "uuid": "15e5cb07-5520-4a85-80bc-0e67e0c445d5",
+      "type": "http",
       "documentation": "Deletes a business by ID",
       "method": "delete",
       "endpoint": "businesses/:id",
       "responses": [
         {
-          "uuid": "d8072903-be41-4353-91d4-0b64d51e3c3c",
+          "uuid": "de469e84-dd32-4687-ada0-b31283eeb2fe",
           "body": "",
           "latency": 0,
           "statusCode": 204,
@@ -127,7 +137,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -136,7 +148,7 @@
           "default": true
         },
         {
-          "uuid": "1ad5e8b2-c009-474c-af0d-6fc9d80a3052",
+          "uuid": "c6b18b81-16c3-4550-9c45-92ef41f93caa",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -147,7 +159,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -157,18 +171,18 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
-      "uuid": "d9281376-9333-4600-8b7c-88a6719abf6e",
+      "uuid": "38ba7672-c955-4524-adae-5ff8541d42f7",
+      "type": "http",
       "documentation": "Update a business",
       "method": "put",
       "endpoint": "businesses/:id",
       "responses": [
         {
-          "uuid": "06b04a24-c9c9-46f4-9b62-0b555bd12d75",
-          "body": "{\n  \"EventID\": {{faker 'datatype.number'}},\n  \"Status\": \"\"\n}",
+          "uuid": "f79c7533-dae7-4ec1-850d-99d5f49d087b",
+          "body": "{\n  \"BusinessID\": \"{{urlParam 'id'}}\",\n  \"Status\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "business",
@@ -178,7 +192,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -187,7 +203,7 @@
           "default": true
         },
         {
-          "uuid": "4dedad1a-630f-4054-905b-563e02c72874",
+          "uuid": "e702a5c0-65dd-42ca-b5e6-fea6391710dd",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -198,7 +214,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -208,18 +226,18 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
-      "uuid": "2200ba27-8b4e-498b-a3ce-31c2fb3b4fcf",
+      "uuid": "fd4f2e16-2645-4ce9-b4af-1f09d4653180",
+      "type": "http",
       "documentation": "Creates a new business",
       "method": "post",
       "endpoint": "businesses",
       "responses": [
         {
-          "uuid": "fa4c9ca6-20fc-48b4-9571-997cef781138",
-          "body": "{\n  \"EventID\": {{faker 'datatype.number'}},\n  \"Status\": \"\"\n}",
+          "uuid": "333d6a15-fb80-4a9e-b99c-f5681315fded",
+          "body": "{\n  \"BusinessID\": \"{{faker 'datatype.uuid'}}\",\n  \"Status\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "business",
@@ -229,7 +247,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -238,7 +258,7 @@
           "default": true
         },
         {
-          "uuid": "b6bd16f6-e129-4fef-a27c-5493edaa2759",
+          "uuid": "c5a207b0-c6e6-4ac8-b431-70ba9a0ccd0a",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -249,7 +269,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -259,18 +281,18 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
-      "uuid": "47079ac6-4c68-448d-8e42-f682f596ebc6",
+      "uuid": "ae2c19a9-44d2-4638-8326-26adba0d4d63",
+      "type": "http",
       "documentation": "Returns businesses based on query strings",
       "method": "get",
       "endpoint": "businesses",
       "responses": [
         {
-          "uuid": "61ceab69-c49b-4f5c-8c3e-8c19da7aa4a6",
-          "body": "[\n  {\n    \"EventID\": {{faker 'datatype.number'}},\n    \"Status\": \"\"\n  }\n]",
+          "uuid": "7c9008cc-15d5-4ad7-8192-b109111bd3b5",
+          "body": "[\n  {\n    \"BusinessID\": \"{{faker 'datatype.uuid'}}\",\n    \"Status\": \"\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "business response",
@@ -280,7 +302,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -289,7 +313,7 @@
           "default": true
         },
         {
-          "uuid": "94966434-7a62-4d07-8e9c-889bb2d9ec9d",
+          "uuid": "24043abf-f288-4844-baf6-c9b790167bdd",
           "body": "{\n  \"code\": {{faker 'datatype.number'}},\n  \"message\": \"\"\n}",
           "latency": 0,
           "statusCode": 200,
@@ -300,7 +324,9 @@
               "value": "application/json"
             }
           ],
+          "bodyType": "INLINE",
           "filePath": "",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
@@ -310,8 +336,33 @@
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "2f145a8f-df46-4d72-aa74-ac030c5d471f"
+    },
+    {
+      "type": "route",
+      "uuid": "a614f1c6-b062-4161-9c5a-0a30e866e9e3"
+    },
+    {
+      "type": "route",
+      "uuid": "15e5cb07-5520-4a85-80bc-0e67e0c445d5"
+    },
+    {
+      "type": "route",
+      "uuid": "38ba7672-c955-4524-adae-5ff8541d42f7"
+    },
+    {
+      "type": "route",
+      "uuid": "fd4f2e16-2645-4ce9-b4af-1f09d4653180"
+    },
+    {
+      "type": "route",
+      "uuid": "ae2c19a9-44d2-4638-8326-26adba0d4d63"
     }
   ],
   "proxyMode": false,
@@ -339,5 +390,6 @@
       "key": "",
       "value": ""
     }
-  ]
+  ],
+  "data": []
 }
