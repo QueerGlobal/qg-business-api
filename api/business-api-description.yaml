@@ -39,22 +39,22 @@ paths:
     get:
       summary: Returns a business by ID
       description: Returns a business based on a single ID
-      operationId: FindEventById
+      operationId: FindBusinessById
       parameters:
         - name: id
           in: path
           description: ID of business to fetch
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
+            format: uuid
       responses:
         '200':
           description: business response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
+                $ref: '#/components/schemas/Business'
         default:
           description: unexpected error
           content:
@@ -86,29 +86,29 @@ paths:
     put:
       summary: Update a business
       description: Updates business. Duplicates are allowed
-      operationId: UpdateEvent
+      operationId: UpdateBusiness
       parameters:
         - name: id
           in: path
           description: ID of business to delete
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
+            format: uuid
       requestBody:
-        description: Event to update to the page
+        description: Business to update to the page
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/Business'
       responses:
         '200':
           description: business
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventResponse'
+                $ref: '#/components/schemas/BusinessResponse'
         default:
           description: unexpected error
           content:
@@ -121,21 +121,21 @@ paths:
     post:
       summary: Creates a new business
       description: Creates a new business. Duplicates are allowed
-      operationId: AddEvent
+      operationId: AddBusiness
       requestBody:
-        description: Event to add to the page
+        description: Business to add to the page
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/Business'
       responses:
         '200':
           description: business
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventResponse'
+                $ref: '#/components/schemas/BusinessResponse'
         default:
           description: unexpected error
           content:
@@ -146,7 +146,7 @@ paths:
     get:
       summary: Returns businesses based on query strings
       description: Returns businesses based on query strings
-      operationId: FindEvents
+      operationId: FindBusinesss
       parameters:
         - name: tags
           in: query
@@ -194,7 +194,7 @@ paths:
               schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/EventResponse'
+                    $ref: '#/components/schemas/BusinessResponse'
         default:
           description: unexpected error
           content:
@@ -215,24 +215,22 @@ components:
         serviceName:
           type: string
 
-    EventSummary:
+
+    Business:
       type: object
       required:
+        - BusinessID
+        - ResourceID
         - Type
-        - Title
-        - Header
+        - Status
       properties: 
-        EventID:
-          type: integer
-          format: int64
-        Owner:
-          type: integer
-          format: int64
+        BusinessID:
+          type: string
+          format: uuid
+        ResourceID:
+          type: string
+          format: uuid
         Type:
-          type: string
-        Header:
-          type: string
-        Title:
           type: string
         Status:
           type: integer
@@ -240,43 +238,42 @@ components:
           minimum: 1
           maximum: 255
           default: 1
-
-    Event:
-      type: object
-      properties: 
-        EventID:
-          type: integer
-          format: int64
-        Summary:
-          type: object
-          $ref: '#/components/schemas/EventSummary'
-        Body:
-          type: string
         Objects:
           type: array
           items:
             $ref: '#/components/schemas/Object'
-        Categories:
+        Images:
           type: array
           items:
-            $ref: '#/components/schemas/Category'
-        Chips: 
-          type: array
-          items:
-            $ref: '#/components/schemas/Chip'
-        
+            $ref: '#/components/schemas/Image'
 
-    EventResponse:
+    BusinessResponse:
       type: object
       required:
-        - EventID
+        - BusinessID
         - Status
       properties: 
-        EventID:
-          type: integer
-          format: int64
+        BusinessID:
+          type: string
+          format: uuid
         Status:
           type: string
+
+    Image:
+      type: object
+      required:
+        - ImageID
+        - ImageName
+        - Link
+      properties: 
+        ImageID:
+          type: string
+          format: uuid
+        ImageName:
+          type: string
+        Link:
+          type: string
+          format: uri
 
     Object:
       type: object
@@ -285,8 +282,8 @@ components:
         - Object
       properties: 
         ObjectID:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         ObjectName:
           type: string
         ObjectType:
@@ -304,8 +301,8 @@ components:
         - CategoryName 
       properties: 
         CategoryID:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         CategoryName:
           type: string
         CategoryDescription:
@@ -316,8 +313,8 @@ components:
         - value
       properties:
         id:
-          type: number
-          format: int64
+          type: string
+          format: uuid
         value:
           type: string
 
