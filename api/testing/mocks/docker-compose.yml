@@ -1,13 +1,13 @@
 version: "3.7"
 
 services:
-  mock-server:
+  qg-business-mock-server:
     image: mockoon/cli:latest
-    command: ["--data", "data", "--port", "31001"]
+    command: ["--data", "data", "--port", "3001"]
     ports:
-      - 31001:31001
+      - "31001:3001"
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:31001/api/healthcheck || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/api/healthcheck || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 2
